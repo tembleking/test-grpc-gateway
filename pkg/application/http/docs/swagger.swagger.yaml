@@ -1,0 +1,64 @@
+swagger: "2.0"
+info:
+  title: service.proto
+  version: version not set
+tags:
+  - name: TestService
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /test:
+    get:
+      summary: The description of the method
+      operationId: TestService_Test
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/TestResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - TestService
+      security:
+        - Bearer: []
+definitions:
+  TestResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        description: Message is the test message.
+        required:
+          - message
+    description: TestResponse is the response message for the Test method.
+    required:
+      - message
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      message:
+        type: string
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    description: Bearer Token
+    name: Authorization
+    in: header
