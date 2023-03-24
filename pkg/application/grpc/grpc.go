@@ -13,8 +13,12 @@ import (
 type server struct {
 }
 
+func (s *server) ReceiveName(ctx context.Context, request *proto.TestRequestWithName) (*proto.TestResponse, error) {
+	return &proto.TestResponse{Message: "Hello " + request.Name}, nil
+}
+
 func (s *server) Test(ctx context.Context, empty *emptypb.Empty) (*proto.TestResponse, error) {
-	return &proto.TestResponse{Message: "Hello world!"}, nil
+	return &proto.TestResponse{Message: "Hello world!!!"}, nil
 }
 
 func NewServer() *grpc.Server {

@@ -38,10 +38,24 @@ service TestService {
       get: "/test"
     };
   }
+
+  // The description of the method
+  rpc ReceiveName(TestRequestWithName) returns (TestResponse) {
+    option (google.api.http) = {
+      post: "/test"
+      body: "*"
+    };
+  }
 }
 
 // TestResponse is the response message for the Test method.
 message TestResponse {
   // Message is the test message.
   string message = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// TestRequestWithName is the request message for the ReceiveName method.
+message TestRequestWithName {
+  // Name is the name of the person.
+  string name = 1;
 }

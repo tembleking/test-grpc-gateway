@@ -1,6 +1,6 @@
 
 
-build-proto:
+build-proto: deps
     #!/usr/bin/env bash
     cd pkg/application/proto
     buf mod update
